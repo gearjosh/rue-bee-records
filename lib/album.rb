@@ -1,5 +1,6 @@
 class Album
-  attr_reader :id, :name
+  attr_reader :id
+  attr_accessor :name
   @@albums = {}
   @@total_rows = 0
 
@@ -17,8 +18,21 @@ class Album
     @@total_rows = 0
   end
 
+  def self.find(id)
+    @@albums[id]
+  end
+
   def save
     @@albums[self.id] = Album.new(self.name, self.id)
+  end
+
+  def update(name)
+    self.name = name
+    @@albums[id] = Album.new(self.name, id)
+  end
+
+  def delete
+    @@albums.delete(id)
   end
 
   def ==(album_to_compare)
